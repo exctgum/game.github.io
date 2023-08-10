@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Permainan Klik Gambar</title>
+    <title>Game RPG Sederhana</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -15,53 +15,19 @@
         #game-container {
             margin-top: 100px;
         }
-        #target {
-            width: 200px;
-            height: 200px;
-            cursor: pointer;
-        }
     </style>
 </head>
 <body>
     <div id="game-container">
-        <h1>Permainan Klik Gambar</h1>
-        <p>Klik gambar sebanyak mungkin dalam waktu 10 detik!</p>
-        <img src="target.png" alt="Target" id="target" onclick="hitTarget()">
-        <p>Skor: <span id="score">0</span></p>
-        <p>Waktu: <span id="time">10</span> detik</p>
-        <button id="startButton" onclick="startGame()">Mulai Permainan</button>
+        <h1>Game RPG Sederhana</h1>
+        <p>Selamat datang di dunia RPG! Kamu adalah seorang pahlawan yang memulai petualangan baru.</p>
+        <button onclick="mulaiPetualangan()">Mulai Petualangan</button>
+        <p id="hasilAksi"></p>
     </div>
 
     <script>
-        let score = 0;
-        let time = 10;
-        let gameInterval;
-
-        function startGame() {
-            score = 0;
-            time = 10;
-            document.getElementById("score").textContent = score;
-            document.getElementById("time").textContent = time;
-
-            document.getElementById("startButton").disabled = true;
-
-            gameInterval = setInterval(updateTime, 1000);
-        }
-
-        function updateTime() {
-            time--;
-            document.getElementById("time").textContent = time;
-
-            if (time === 0) {
-                clearInterval(gameInterval);
-                document.getElementById("startButton").disabled = false;
-                alert(`Permainan selesai! Skor Anda: ${score}`);
-            }
-        }
-
-        function hitTarget() {
-            score++;
-            document.getElementById("score").textContent = score;
+        function mulaiPetualangan() {
+            document.getElementById("hasilAksi").textContent = "Kamu menemukan pedang legendaris di hutan!";
         }
     </script>
 </body>
