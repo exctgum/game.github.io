@@ -3,32 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game RPG Sederhana</title>
+    <title>Animasi Orang Berjalan</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
             margin: 0;
-            padding: 0;
             background-color: #f0f0f0;
         }
-        #game-container {
-            margin-top: 100px;
+        .person {
+            width: 50px;
+            height: 100px;
+            position: relative;
+            background-color: #333;
+            animation: walk 1s infinite alternate;
+        }
+        .leg {
+            width: 20px;
+            height: 40px;
+            position: absolute;
+            bottom: 0;
+            background-color: #666;
+        }
+        .leg.left {
+            left: 10px;
+            animation: leg-walk-left 1s infinite alternate;
+        }
+        .leg.right {
+            right: 10px;
+            animation: leg-walk-right 1s infinite alternate;
+        }
+        @keyframes walk {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(50px);
+            }
+        }
+        @keyframes leg-walk-left {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(30deg);
+            }
+        }
+        @keyframes leg-walk-right {
+            0%, 100% {
+                transform: rotate(0deg);
+            }
+            50% {
+                transform: rotate(-30deg);
+            }
         }
     </style>
 </head>
 <body>
-    <div id="game-container">
-        <h1>Game RPG Sederhana</h1>
-        <p>Selamat datang di dunia RPG! Kamu adalah seorang pahlawan yang memulai petualangan baru.</p>
-        <button onclick="mulaiPetualangan()">Mulai Petualangan</button>
-        <p id="hasilAksi"></p>
+    <div class="person">
+        <div class="leg left"></div>
+        <div class="leg right"></div>
     </div>
-
-    <script>
-        function mulaiPetualangan() {
-            document.getElementById("hasilAksi").textContent = "Kamu menemukan pedang legendaris di hutan!";
-        }
-    </script>
 </body>
 </html>
