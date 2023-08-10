@@ -3,43 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Permainan Tebak Angka</title>
+    <title>Permainan Klik Gambar</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             margin: 0;
             padding: 0;
+            background-color: #f0f0f0;
         }
-        #container {
+        #game-container {
             margin-top: 100px;
+        }
+        #target {
+            width: 200px;
+            height: 200px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div id="container">
-        <h1>Permainan Tebak Angka</h1>
-        <p>Tebak angka antara 1 dan 100</p>
-        <input type="number" id="guessInput" placeholder="Masukkan tebakan Anda">
-        <button onclick="checkGuess()">Tebak</button>
-        <p id="message"></p>
+    <div id="game-container">
+        <h1>Permainan Klik Gambar</h1>
+        <p>Klik gambar sebanyak mungkin dalam waktu 10 detik!</p>
+        <img src="target.png" alt="Target" id="target" onclick="hitTarget()">
+        <p>Skor: <span id="score">0</span></p>
+        <p>Waktu: <span id="time">10</span> detik</p>
+        <button id="startButton" onclick="startGame()">Mulai Permainan</button>
     </div>
 
     <script>
-        const targetNumber = Math.floor(Math.random() * 100) + 1;
-        let numberOfGuesses = 0;
+        let score = 0;
+        let time = 10;
+        let gameInterval;
 
-        function checkGuess() {
-            const guess = parseInt(document.getElementById("guessInput").value);
-            numberOfGuesses++;
+        function startGame() {
+            score = 0;
+            time = 10;
+            document.getElementById("score").textContent = score;
+            document.getElementById("time").textContent = time;
 
-            if (guess === targetNumber) {
-                document.getElementById("message").textContent = `Selamat! Anda menebak angka ${targetNumber} dengan ${numberOfGuesses} tebakan.`;
-            } else if (guess < targetNumber) {
-                document.getElementById("message").textContent = "Angka terlalu kecil. Coba lagi.";
-            } else {
-                document.getElementById("message").textContent = "Angka terlalu besar. Coba lagi.";
+            document.getElementById("startButton").disabled = true;
+
+            gameInterval = setInterval(updateTime, 1000);
+        }
+
+        function updateTime() {
+            time--;
+            document.getElementById("time").textContent = time;
+
+            if (time === 0) {
+                clearInterval(gameInterval);
+                document.getElementById("startButton").disabled = false;
+                alert(`Permainan selesai! Skor Anda: ${score}`);
             }
+        }
+
+        function hitTarget() {
+            score++;
+            document.getElementById("score").textContent = score;
         }
     </script>
 </body>
