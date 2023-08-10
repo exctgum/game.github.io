@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permainan Tebak Angka</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        #container {
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Permainan Tebak Angka</h1>
+        <p>Tebak angka antara 1 dan 100</p>
+        <input type="number" id="guessInput" placeholder="Masukkan tebakan Anda">
+        <button onclick="checkGuess()">Tebak</button>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const targetNumber = Math.floor(Math.random() * 100) + 1;
+        let numberOfGuesses = 0;
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById("guessInput").value);
+            numberOfGuesses++;
+
+            if (guess === targetNumber) {
+                document.getElementById("message").textContent = `Selamat! Anda menebak angka ${targetNumber} dengan ${numberOfGuesses} tebakan.`;
+            } else if (guess < targetNumber) {
+                document.getElementById("message").textContent = "Angka terlalu kecil. Coba lagi.";
+            } else {
+                document.getElementById("message").textContent = "Angka terlalu besar. Coba lagi.";
+            }
+        }
+    </script>
+</body>
+</html>
